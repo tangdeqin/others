@@ -1,0 +1,123 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:orientation="vertical">
+    
+<!--设置字体10pt  -->
+<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="我爱TCL通讯"
+        android:textSize="5pt" />
+
+<!--省略中间-->
+<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="我爱TCL通讯111111121321231231qwqddwdwdqeqwe21sdcsdsdsds我爱TCL通讯"
+        android:ellipsize="middle" />
+<!--对邮件增加链接-->
+<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="网站：www.baidu.com"
+        android:autoLink="web" />
+
+<!--设置文字的颜色、大小、设置阴影-->
+<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="我爱TCL通讯"
+        android:textColor="#ff0000"
+        android:textSize="5pt"
+        android:shadowColor="#000000"
+        android:shadowDx="15.0"
+        android:shadowDy="20.0"
+        android:shadowRadius="45.0"/>
+
+<!--密码框-->
+<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12345"
+        android:password="true" />
+
+<!--背景-bitmap-->
+<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="背景测试"
+        android:textSize="10pt"
+        android:background="@drawable/bitmap"/>
+
+<!--背景-xml绘制：矩形-->
+<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="背景测试"
+        android:textSize="5pt"
+        android:background="@drawable/bg_border"/>
+
+<!--背景-xml绘制：椭圆-->
+<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="背景"
+        android:textSize="5pt"
+        android:background="@drawable/bg_oval_border"/>
+<!--背景-xml绘制：线形-->
+<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="        "
+        android:textSize="5pt"
+        android:background="@drawable/bg_line_border"/>
+
+<!--背景-xml绘制：环形-->
+<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="    "
+        android:textSize="5pt"
+        android:background="@drawable/bg_ring_border"/>
+
+<!-- 阴影设置-xml绘制 -->
+<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_shadow_corners_rectangle"
+        android:textSize="5pt"
+        android:text="带阴影的圆角矩形" />
+
+<!-- 文本跑马灯 -->  
+<TextView 
+        android:id="@+id/tvRunLamp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:background="#FFF"
+        android:textColor="#000"
+        android:textSize="5dp" 
+         android:layout_margin="10dp"
+         android:padding="10dp"/>
+
+<!-- html-文字中绑定网站 -->
+<TextView 
+        android:id="@+id/textView1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="10pt"/>
+
+<!-- html-图片中绑定网站 -->
+<TextView
+	android:id="@+id/textImg"
+	android:layout_width="fill_parent"
+	android:layout_height="match_parent"
+	android:layout_margin="5dp" />
+</LinearLayout>

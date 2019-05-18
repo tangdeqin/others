@@ -1,0 +1,41 @@
+<shape
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <!-- 默认为rectangle，其他oval：椭圆，line：线形，ring：环形 -->
+    <shape
+        android:shape="rectangle"/>
+    
+    <!-- 设置矩形的四周圆角半径，android:Radius属性直接设置四周圆角 -->
+    <corners
+        android:topLeftRadius="10dip"
+        android:topRightRadius="10dip"
+        android:bottomLeftRadius="10dip"
+        android:bottomRightRadius="10dip"/>
+    
+    <!-- 设置内容与边框的距离 -->
+    <padding
+        android:left="5dip"
+        android:top="5dip"
+        android:right="5dip"
+        android:bottom="5dip"/>
+    
+    <!-- 设置背景色 -->
+    <solid 
+        android:color="#ffff00"/>
+    
+    <!-- 设置描边 -->
+    <stroke 
+        android:width="2dip"    
+        android:color="#ff0000"
+        android:dashWidth="4dip"
+        android:dashGap="4dip"/>
+    
+    <!-- 渐变 -->
+    <gradient  
+        android:type="linear"
+        android:angle="45"
+        android:centerColor="#fff000"
+        android:endColor="#ffffff"
+        android:startColor="#000000"
+        android:useLevel="true"/>
+</shape>

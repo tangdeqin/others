@@ -1,0 +1,51 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="性别" />
+
+     <RadioGroup
+         android:id="@+id/sex_select"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:orientation="horizontal" >
+
+         <RadioButton 
+             android:id="@+id/man"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:checked="true"
+             android:button="@null"
+             android:text="男性"
+             android:drawableTop="@drawable/selector"/>
+
+         <RadioButton
+             android:id="@+id/woman"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:button="@null"
+             android:drawableTop="@drawable/womanselector"
+             android:text="女性"/>
+
+     </RadioGroup>
+
+     <TextView
+         android:id="@+id/textView1"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="您的选择是：。。。"
+         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+     <Button
+         android:id="@+id/button1"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="确定" />
+
+</LinearLayout>
