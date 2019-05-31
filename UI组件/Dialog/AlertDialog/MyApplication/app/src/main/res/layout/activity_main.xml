@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btn_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1个确定按钮" />
+    <Button
+        android:id="@+id/btn_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2个按钮(确定和取消)" />
+    <Button
+        android:id="@+id/btn_three"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="普通列表对话框" />
+    <Button
+        android:id="@+id/btn_four"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="自定义对话框" />
+    <Button
+        android:id="@+id/btn_five"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="单选列表对话框" />
+
+    <Button
+        android:id="@+id/btn_six"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="多选列表对话框" />
+
+    <Button
+    android:id="@+id/btn_seven"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="进度圈对话框" />
+    <Button
+        android:id="@+id/btn_eight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="进度条对话框" />
+
+    <Button
+        android:id="@+id/btn_night"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="日期对话框" />
+    <Button
+        android:id="@+id/btn_ten"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="时间条对话框" />
+
+</LinearLayout>

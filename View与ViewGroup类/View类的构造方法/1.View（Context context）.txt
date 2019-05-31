@@ -1,0 +1,33 @@
+package com.example.tdq.as.myapplication;
+
+import android.annotation.SuppressLint;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.ViewParent;
+import android.widget.Button;
+import android.widget.LinearLayout;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        //方法1
+        Button button1 = new Button(this);
+        button1.setText("one");
+
+        @SuppressLint("WrongViewCast") //ViewParent是一个接口，被ViewGroup实现
+        ViewParent viewParent = findViewById(R.id.textview).getParent();
+        LinearLayout linearLayout = (LinearLayout)viewParent;
+        linearLayout.addView(button1,200,100);
+
+        //方法2
+        Button button2 = new Button(this);
+        button2.setText("two");
+
+        LinearLayout linearLayout1 = findViewById(R.id.linearlayout);
+        linearLayout1.addView(button2,200,100);
+    }
+}
