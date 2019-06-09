@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_one"/>
+    <Button
+        android:id="@+id/bt_write"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="写入"
+        android:onClick="onClick"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_two"/>
+    <Button
+        android:id="@+id/bt_read"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="读出"
+        android:onClick="onClick"/>
+
+</LinearLayout>
