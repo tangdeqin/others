@@ -1,0 +1,246 @@
+----------------adb命令--------------------------
+
+1.查看radio log
+adb logcat -b radio | grep "SmsBroadcastConfigInfo:"
+
+2.adb启动activity
+adb shell am start -a action XXX -n 包名/.activity全類名adb shell am start
+
+3.查看当前连接的机器
+adb devices
+
+4.将电脑的文件复制到手机
+adb push FROM.file TO.file
+
+5.将手机文件复制到电脑
+adb pull To.file FROM.file
+
+6.获取手机root权限
+adb root
+
+7.重新挂载系统分区，使系统分区重新可写
+adb remount
+
+8.打开手机shell窗口
+adb shell
+
+9.查找文件
+adb find . -iname "关键字"
+
+10.安装apk
+adb install -r -s -g apk路径
+  1)-r 重新安装apk并保留数据和缓存文件
+  2)-s 安装在SD卡（默认安装在手机内存）
+  3) -g 授予所有运行时权限
+
+11.卸载apk 
+adb uninstall -k （apk包名）
+ 1) -k 卸载 app 但保留数据和缓存文件
+
+12.
+ 1)列出手机装的所有app的包名：
+  adb shell pm list packages
+
+ 2)列出系统应用的所有包名：
+  adb shell pm list packages -s
+
+ 3)列出除了系统应用的第三方应用包名：
+   adb shell pm list packages -3 
+
+13.清除应用数据与缓存：
+adb shell pm clear （apk包名）
+
+14.强制停止应用
+adb shell am force-stop （apk包名）
+
+15.高通刷机引导
+adb reboot edl
+
+16.重启手机
+adb reboot
+
+17.解锁system分区
+adb diable-verity
+
+18.调起 Service
+db shell am startservice -n 包名/.Service名
+
+19.发送广播
+ 1)所有组件广播 BOOT_COMPLETED：
+  adb shell am broadcast -a android.intent.action.BOOT_COMPLETED
+ 2)向特定组件发送广播
+  adb shell am broadcast -a android.intent.action.BOOT_COMPLETED -n 包名/.broadcast名
+
+20.截图保存到电脑：
+   adb exec-out screencap -p > sc.png
+
+21.录制屏幕以 mp4 格式保存到 /sdcard
+
+   adb shell screenrecord /sdcard/filename.mp4
+
+22.log写入txt
+adb logcat -v time > log.txt
+
+23.获取屏幕尺寸
+adb shell wm size
+
+24.打印任务栈(activitys)
+adb shell dumpsys activity
+
+25.monkey
+adb shell monkey -p 包名 次数
+
+26.设置屏幕亮度
+adb shell settings put system screen_brightness xxx
+
+27.查看运行APP当前页面的Activity名称
+
+adb shell "dumpsys window | grep mCurrentFocus"
+
+28.查看apk版本
+adb shell dumpsys package com.android.phone | grep versionName
+
+29.跳过开机向导
+adb shell setprop esim_debug_mode 1 && adb shell setprop debug_mdn 123456789
+ && adb shell am broadcast -a com.odm.setupwizardoverlay.PCO_CHANGE --ei pco_data 0
+在那个跳不过去的页面执行这些命令就可以直接当激活跳过
+手机重启后 设置的参数就没了
+
+30.模拟点按实体按钮
+adb shell input keyevent XX
+
+
+----------------其他----------------------------
+
+1.合并文件
+meld /local/Code/ROM_gapp/CellBroadcastReceiver/ /local/Code/Android_o_gapp/CellBroadcastReceiver/
+
+2.编译overlay
+python ./makeperso/build/makeperso/makePerso.py -p pixi4_5 -t ./ db
+
+3.链接外网
+sudo sh start.sh
+
+4.查看文本
+grep -nr " 文本"
+
+5.复制QSDK
+scp -r user@10.92.33.145:/local/1/QSDK /home/sdb/
+
+6.高通o抓log
+*#*#825364#*#*    
+
+7.mtk抓log
+*#*#82533284#*#*
+
+8.monkey测试
+adb shell monkey -p com.android.settings -v 5000 >~/Desktop/log.txt
+
+9.unlock
+ (1)adb reboot bootloader
+
+ (2)fastboot flashing unlock
+
+ (3)fastboot getvar unlocked
+
+10.systemui 杀进程
+1)adb shell ps -A | grep systemui
+2）adb shell kill -9 进程号
+
+11.编译framework
+ mmm frameworks/base:services   / make -j8 services
+ mmm frameworks/base:framework / make -j8 framework-minus-apex
+ mmm frameworks/base/core/res/res/
+
+#调试framework
+#编译framework，Android 11和之前版本有所区别，
+#此处不能使用make framework -j32 或者mmm framework/base -j32都是不行的
+make -j32 framework-minus-apex  
+
+adb root
+adb remount
+adb shell "rm -rf /system/framework/arm"
+adb push framework.jar /system/framework
+adb shell sync
+adb reboot
+
+#调试services
+mmm framework/base/services -j32 或者 make -j32 services
+
+adb root
+adb remount
+adb shell "rm -rf /system/framework/arm"
+adb push services.jar /system/framework
+adb shell "rm -rf /data/dalvik-cache/arm/system@framework@services.jar@classes.* "
+adb shell sync
+adb reboot
+
+ 
+12.编译原生Settings
+make Settings
+
+13.编译原生SystmUI
+mmm frameworks/base/packages/SystemUI/
+
+14.提交代码
+	1)git add 
+	2)git commit
+	3)
+		git push jgs HEAD:refs/for/Q6801_SM6350_DEV_V3          
+		git push jgs HEAD:refs/for/Q6802_SM6350_DEV_V2
+	4)git commit后回退：git reset HEAD~1
+	5）查看分支git branch -av
+15.刷modem:
+fastboot flash modem NON-HLOS.bin
+
+16.编译升级包:
+./build/tools/releasetools/ota_from_target_files -k build/target/product/security/releasekey -i OTA/ota_target_files_1.0.21.zip OTA/ota_target_files_1.0.22.zip OTA/update21_22.zip
+编译降级包:
+./build/tools/releasetools/ota_from_target_files -k build/target/product/security/releasekey --downgrade -i OTA/ota_target_files_1.0.41.zip OTA/ota_target_files_1.0.39.zip OTA/update41_39.zip
+
+./build/tools/releasetools/ota_from_target_files --downgrade -i OTA/ota_target_files_1.0.41.zip OTA/ota_target_files_1.0.39.zip OTA/update.zip
+
+17.服务器网址:##662362337#
+https://ivzwmdmv.iot.motive.com
+
+18 编译taget包 ./build.sh all sdm439 userdebug ota -j24                                   
+taget包路径:out/target/product/msm8937_32go/obj/PACKAGING/target_files_intermediates/msm8937_32go-target_files.zip
+
+19.转换差分包
+./make_upc.sh 差分包文件名 原始版本号 目标版本号
+
+20.112服务器
+帐号:user
+密码:dxdragon
+
+21.修改电池电量
+adb root
+adb remount
+adb shell
+cd sys/class/power_supply/battery/
+echo '20' > capacity
+
+22.debug 版本可adb 命令进行调试fota
+     adb root
+     adb push update.zip /data/update.zip
+     adb shell mkdir /cache/recovery
+     cd /cache/recovery
+     echo "--update_package=/data/update.zip" > command
+     reboot
+    重启后就会自动进行升级，log 在 cache/recovery/last_log
+
+23.打开端口
+adb shell setprop persist.sys.usb.config diag,serial_cdev,rmnet,dpl,qdss,adb
+adb shell setprop sys.usb.config diag,serial_cdev,rmnet,dpl,qdss,adb
+或
+adb shell am start -a com.qualcomm.qti.qmmi.intent.action.OPEN_DIAG
+
+
+
+
+
+
+
+  
+
+

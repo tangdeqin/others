@@ -1,0 +1,219 @@
+一，文件系统中跳转
+1.pwd -----打印出当前工作目录名
+2.cd  -----更改目录
+3.ls  -----列出目录内容   
+4. which 命令 -----查询指定命令的执行路径
+
+1)绝对路径：cd / ----跳转到系统根目录
+2）相对路径：cd ./ ----跳转当前目录   cd ../ ----跳转当前目录的父目录  
+             cd - 返回前一次操作的路径  cd --  返回家目录
+ 	
+
+二，探究操作系统
+1.ls命令的参数选项
+    1）ls -a -----列出目录内容(包括隐藏的文件)
+    2）ls -F -----在所列出的名字后加指示符；例如在目录名后会加"/"字符。
+    3）ls -l -----以长格式显示结果
+    4）ls -h -----当以长格式列出时，以可读形式来显示文件大小，而不是字节数。
+    5）ls -r -----结果按照字符升序排列
+    6）ls -s -----结果按照文件大小排列
+    7）ls -t -----结果按照修改时间排序
+    8）ls -R -----递归查询所有目录及其目录下的文件
+    9）ls 路径  ------查询指定路径的目录下的文件
+    10）ls -d 路径　------查询指定路径下目录本身
+    
+2.file filename -----打印出文件的简单描述，包括格式。
+3.cat filename	-----显示文本文件的内容。
+4.tac filename  -----按行倒序显示文本文件的内容。
+5.more（less） filename	-----分屏显示大文本文件的内容（空格键翻页，enter键换行，q键退出）。
+6.head -n filename	-----显示文本文件前n行的内容。
+6.tail -n filename	-----显示文本文件后n行的内容。
+7.tree 
+8.ln -s file file.soft -----软链接
+9.ln file file.hard -----硬链接
+
+三，操作文件和目录
+1.cp item... directory ----复制文件或目录（-r 递归复制 -a:包括属性复制（时间、权限等））到directory
+2.mkdir directory...   ----创建目录
+3.mv                   ----移动/重命名文件或者目录
+4.rm -rf 	               ----删除文件或目录(r：递归删除 f：强制删除)
+5.touch  xxx.c              ----创建空.c文件
+
+四.重定向
+1.重定向标准输出：
+  例如：将ls命令的输出放到/home/deqin/桌面/output.txt中(重写):   ls  /home/deqin/桌面 > output.txt
+	将ls命令的输出放到/home/deqin/桌面/output.txt中(追加):   ls  /home/deqin/桌面 >> output.txt
+
+2.重定向标准错误：
+  例如：将ls命令的错误输出放到/home/deqin/桌面/output.txt中(重写):   ls  /home/deqin/桌面 2> output.txt
+	将ls命令的错误输出放到/home/deqin/桌面/output.txt中(追加):   ls  /home/deqin/桌面 2>> output.txt
+3.重定向标准输出和标准错误到同一个文件：
+  例如：将ls命令的输出放到/home/deqin/桌面/output.txt中(重写):   ls  /home/deqin/桌面 &> output.txt
+	将ls命令的输出放到/home/deqin/桌面/output.txt中(追加):   ls  /home/deqin/桌面 &>> output.txt
+
+4.拼接
+  将文件a,b...拼接接到c文件中： cat a.txt b.txt ... > c.txt
+
+
+五，权限
+
+1.更改文件权限：
+chmod XXX 文件名
+
+2.创建文件前设置默认权限：
+umask XXX
+
+3.以root账户运行shell：
+sudo passwd root--->su -l --->exit
+
+4.以root账户运行命令：
+sudo 命令
+
+5.创建新用户：
+sudo adduser username 
+
+6.删除用户(用户正在使用不能删除)：
+sudo userdel username
+
+7.修改用户账户：
+sudo usermod -l newname oldname
+
+8.创建用户组：
+sudo groupadd -g GID groupName
+
+9.添加组成员：
+sudo gpasswd -a userName GroupName 
+
+10.删除组成员：
+sudo gpasswd -d userName GroupName
+
+11.修改组名
+sudo groupmod -n newName oldName
+
+12.删除组：
+sudo groupdel GroupName
+
+13.改变文件的所有者和用户组；
+chown userName:GroupName 文件名
+
+六，查询
+1.find查询命令：
+	-type 按文件类型搜索（f:普通文件 不是‘-’）    比如：find ./ -type 'l'  搜软链接(遇到目录就进入) 
+	-name 按文件名搜索	    比如：find ./ -name '*.mp3'  搜mp3文件（遇到目录就进入）
+	-maxdepth 指定搜索深度（只能作为第一个参数）  比如：find ./ -maxdepth 2 -name '*.mp3'  搜mp3文件
+	-size 按文件大小搜索  比如：find ./ -size +20M -size -50M  搜大于20M小于50M的文件
+	-exec 将find搜索的结果执行某一指定的命令
+	 例如：find ./ -name '*.mp3' -exec ls -l {} \;
+	-ok 以交互的方式将find搜索的结果执行某一指定的命令
+	 例如：find ./ -name '*.mp3' -ok ls -l {} \;
+	-xargs 将find搜索的结果执行某一指定的命令。当结果集数量过大时，可以分片映射。
+	例如：find ./ -name '*.mp3' | xargs ls -l
+	-print0：结果集以null作为分割符（默认是空格和换行符）
+	例如：find ./ -name '*.mp3' -print0 | xargs -print0 ls -l
+	 
+2.grep命令：找文件内容查询
+	-n ：显示行号
+	-r: 递归查询
+	例如：grep -nr "cope" ./
+	
+七，软件安装
+1.更新软件资源列表到本地：sudo apt-get update
+2.安装 sudo apt-get（aptitude） install 软件名
+2.显示安装信息 sudo aptitude show 软件名
+3.卸载 sudo apt-get remove 软件名
+4.安装包（.deb）安装：sudo dpkg -i xxx.deb
+4.卸载：sudo dpkg -r xxx.deb
+
+八.压缩和解压
+1.tar压缩：tar -zcvf 要生成的压缩包名 压缩材料
+  例如：tar zcvf test.tar.gz file dir... 使用gzip方式压缩
+  例如：tar jcvf test.tar.bzip2 file dir... 使用bzip2方式压缩
+  
+2.tar解缩：tar -zxvf 要解压的压缩包名 
+  例如：tar zxvf test.tar.gz  使用gzip方式解缩
+  例如：tar jxvf test.tar.bzip2  使用bzip2方式解缩
+  
+3.rar压缩：rar a -r 要生成的压缩包名 压缩材料
+  例如：rar a  -r test.rar file dir... 
+
+4.rar解缩：unrar x 要解压的压缩包名 
+
+5.zip压缩：zip  -r 要生成的压缩包名 压缩材料
+  例如：zip -r test.zip file dir... 
+
+6.zip解缩：unzip 要解压的压缩包名
+
+
+九，进程
+1.whoami ----列出当前用户名
+2.who    ----列出线上用户的详细信息
+3.ps aux | grep XXX 列出进程
+4.jobs  ---列出后台的用户进程
+5.kill 进程号  ----杀死进程
+6.env  ---列出系统所有环境变量
+
+十.重启和关机
+1.reboot ---重启
+2.shutdown -r now -----立刻重启
+3.shutdown -r 10 ------10分钟后自动重启
+4.shutdown -rar 22:22  ------22:22时候重启
+
+5.halt  ------关机
+6.poweroff -----立刻关机
+7.shutdown -h now -----立刻关机
+8.shutdown -h 10 ------10分钟后自动关机
+
+十一,gcc编译
+1.gcc编译步骤：预处理，编译，汇编，链接
+          gcc -E				gcc -S					gcc -c						gcc
+		  预处理				编译					汇编						链接	
+hello.c---------------->hello.i------------------->hello.s------------------------->hello.o--------------------->a.out
+		展开宏，头文件			检查语法规范				将汇编指令翻译成机器指令		数据段合并，地址回填
+		替换条件编译			消耗时间，资源最多
+		删除注释，空行
+		空白
+		
+2.gcc常用参数
+ -I: 指定头文件所在目录 例如：gcc -I./inc hello.c -o hello 头文件在当前目录的inc目录下
+ -c: 只做预处理，编译，汇编，得到二进制文件
+ -g: 编译时添加调试语句。主要支持gdb调试。
+ -Wall:显示所有警告信息。
+ -D:向程序中动态注册宏定义。
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
